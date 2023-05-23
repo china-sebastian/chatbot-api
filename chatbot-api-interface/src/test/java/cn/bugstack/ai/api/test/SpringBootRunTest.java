@@ -1,5 +1,6 @@
 package cn.bugstack.ai.api.test;
 
+import cn.bugstack.ai.api.domain.ai.IOpenAI;
 import cn.bugstack.ai.api.domain.zsxq.IZsxqApi;
 import cn.bugstack.ai.api.domain.zsxq.model.aggregates.UnansweredQuestionAggregates;
 import cn.bugstack.ai.api.domain.zsxq.model.vo.Topics;
@@ -37,6 +38,9 @@ public class SpringBootRunTest {
     @Resource
     private IZsxqApi zsxqApi;
 
+    @Resource
+    private IOpenAI openAI;
+
     @Test
     public void test_zsxqApi() throws IOException {
         UnansweredQuestionAggregates unansweredQuestionAggregates = zsxqApi.queryUnansweredQuestionsTopicId(groupId, cookie);
@@ -52,8 +56,11 @@ public class SpringBootRunTest {
         }
     }
 
-
-
+    @Test
+    public void test_chatGPT() throws IOException {
+        String respnse = openAI.doChatGPT("帮我写一个Java冒泡排序");
+        logger.info("查询结果:{}",respnse);
+    }
 }
 
 
