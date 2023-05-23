@@ -22,3 +22,8 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+/chatbot-api.iml
+/chatbot-api-interface/chatbot-api-interface.iml
+/chat-api-domain/chat-api-domain.iml
+/chatbot-api-application/chatbot-api-application.iml
+/chatbot-api-infrastrusture/chatbot-api-infrastrusture.iml
