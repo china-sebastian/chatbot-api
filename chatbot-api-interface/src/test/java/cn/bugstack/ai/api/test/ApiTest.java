@@ -25,11 +25,11 @@ public class ApiTest {
     @Test
     public void query_unanswered_questions() throws IOException {
         CloseableHttpClient httpClient = HttpClientBuilder.create().build();
-
-        HttpGet get = new HttpGet("https://api.zsxq.com/v2/groups/28885518425541/topics?scope=unanswered_questions&count=20");
-
-        get.addHeader("cookie", "__cuid=5330a556392a4c5b8084b4cbc165e0f3; amp_fef1e8=930aec23-e22e-4f11-8864-0389bd5095d1R...1g55hl79m.1g55hl79t.1.1.2; UM_distinctid=183e61195d535b-0bddac94679c75-19525635-1aeaa0-183e61195d7c52; sensorsdata2015jssdkcross={\"distinct_id\":\"241858242255511\",\"first_id\":\"17ebd0b4317ecb-0b27f672c2d3af-133a6253-1296000-17ebd0b4318ba7\",\"props\":{\"$latest_traffic_source_type\":\"直接流量\",\"$latest_search_keyword\":\"未取到值_直接打开\",\"$latest_referrer\":\"\"},\"$device_id\":\"17ebd0b4317ecb-0b27f672c2d3af-133a6253-1296000-17ebd0b4318ba7\",\"identities\":\"eyIkaWRlbnRpdHlfY29va2llX2lkIjoiMTgwMmQ2YjZiOWIxZjMtMGQ4YzMzZjhmYTA3YmEtMzU3MzZhMDMtMTI5NjAwMC0xODAyZDZiNmI5YzEwODYiLCIkaWRlbnRpdHlfbG9naW5faWQiOiIyNDE4NTgyNDIyNTU1MTEifQ==\",\"history_login_id\":{\"name\":\"$identity_login_id\",\"value\":\"241858242255511\"}}; abtest_env=product; zsxqsessionid=8fae9a083a4874ab833c2158a44deb82; zsxq_access_token=5D862869-1229-A9B6-1BC1-C662EC4B16DD_D625BA7FD9CBBDFA");
-        get.addHeader("Content-Type", "application/json;charset=utf8");
+        String uri = "https://api.zsxq.com/v2/groups/51112115851124/topics?scope=unanswered_questions&count=20";
+        HttpGet get = new HttpGet(uri);
+        String cookie = "__cuid=f777328da6cb492b9b37b3c48498dace; amp_fef1e8=ffc86820-f39e-42d6-893a-ac36705169a0R...1gr812pmt.1gr81gefq.6.1.7; sensorsdata2015jssdkcross=%7B%22distinct_id%22%3A%22585224152425184%22%2C%22first_id%22%3A%22186d10e7e4b5de-0eb94671a326d7-26031951-1764000-186d10e7e4ce39%22%2C%22props%22%3A%7B%22%24latest_traffic_source_type%22%3A%22%E7%9B%B4%E6%8E%A5%E6%B5%81%E9%87%8F%22%2C%22%24latest_search_keyword%22%3A%22%E6%9C%AA%E5%8F%96%E5%88%B0%E5%80%BC_%E7%9B%B4%E6%8E%A5%E6%89%93%E5%BC%80%22%2C%22%24latest_referrer%22%3A%22%22%7D%2C%22identities%22%3A%22eyIkaWRlbnRpdHlfY29va2llX2lkIjoiMTg2ZDEwZTdlNGI1ZGUtMGViOTQ2NzFhMzI2ZDctMjYwMzE5NTEtMTc2NDAwMC0xODZkMTBlN2U0Y2UzOSIsIiRpZGVudGl0eV9sb2dpbl9pZCI6IjU4NTIyNDE1MjQyNTE4NCJ9%22%2C%22history_login_id%22%3A%7B%22name%22%3A%22%24identity_login_id%22%2C%22value%22%3A%22585224152425184%22%7D%2C%22%24device_id%22%3A%22186d10e7e4b5de-0eb94671a326d7-26031951-1764000-186d10e7e4ce39%22%7D; zsxq_access_token=7C9F10E0-FC42-9DDF-C1BC-7D646E8BE4F9_0921EDF3A6D1FAA1; abtest_env=product; zsxqsessionid=f4a5fb770052e56d9f92c6df1154f6d3";
+        get.addHeader("cookie", cookie);
+        get.addHeader("Content-Type", "application/json; charset=UTF-8");
 
         CloseableHttpResponse response = httpClient.execute(get);
         if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
@@ -43,10 +43,11 @@ public class ApiTest {
     @Test
     public void answer() throws IOException {
         CloseableHttpClient httpClient = HttpClientBuilder.create().build();
-
-        HttpPost post = new HttpPost("https://api.zsxq.com/v2/topics/412884248251548/answer");
-        post.addHeader("cookie", "__cuid=5330a556392a4c5b8084b4cbc165e0f3; amp_fef1e8=930aec23-e22e-4f11-8864-0389bd5095d1R...1g55hl79m.1g55hl79t.1.1.2; UM_distinctid=183e61195d535b-0bddac94679c75-19525635-1aeaa0-183e61195d7c52; sensorsdata2015jssdkcross={\"distinct_id\":\"241858242255511\",\"first_id\":\"17ebd0b4317ecb-0b27f672c2d3af-133a6253-1296000-17ebd0b4318ba7\",\"props\":{\"$latest_traffic_source_type\":\"直接流量\",\"$latest_search_keyword\":\"未取到值_直接打开\",\"$latest_referrer\":\"\"},\"$device_id\":\"17ebd0b4317ecb-0b27f672c2d3af-133a6253-1296000-17ebd0b4318ba7\",\"identities\":\"eyIkaWRlbnRpdHlfY29va2llX2lkIjoiMTgwMmQ2YjZiOWIxZjMtMGQ4YzMzZjhmYTA3YmEtMzU3MzZhMDMtMTI5NjAwMC0xODAyZDZiNmI5YzEwODYiLCIkaWRlbnRpdHlfbG9naW5faWQiOiIyNDE4NTgyNDIyNTU1MTEifQ==\",\"history_login_id\":{\"name\":\"$identity_login_id\",\"value\":\"241858242255511\"}}; abtest_env=product; zsxqsessionid=8fae9a083a4874ab833c2158a44deb82; zsxq_access_token=5D862869-1229-A9B6-1BC1-C662EC4B16DD_D625BA7FD9CBBDFA");
-        post.addHeader("Content-Type", "application/json;charset=utf8");
+        String uri = "https://api.zsxq.com/v2/topics/412241122855118/answer";
+        HttpPost post = new HttpPost(uri);
+        String cookie = "__cuid=f777328da6cb492b9b37b3c48498dace; amp_fef1e8=ffc86820-f39e-42d6-893a-ac36705169a0R...1gr812pmt.1gr81gefq.6.1.7; sensorsdata2015jssdkcross=%7B%22distinct_id%22%3A%22585224152425184%22%2C%22first_id%22%3A%22186d10e7e4b5de-0eb94671a326d7-26031951-1764000-186d10e7e4ce39%22%2C%22props%22%3A%7B%22%24latest_traffic_source_type%22%3A%22%E7%9B%B4%E6%8E%A5%E6%B5%81%E9%87%8F%22%2C%22%24latest_search_keyword%22%3A%22%E6%9C%AA%E5%8F%96%E5%88%B0%E5%80%BC_%E7%9B%B4%E6%8E%A5%E6%89%93%E5%BC%80%22%2C%22%24latest_referrer%22%3A%22%22%7D%2C%22identities%22%3A%22eyIkaWRlbnRpdHlfY29va2llX2lkIjoiMTg2ZDEwZTdlNGI1ZGUtMGViOTQ2NzFhMzI2ZDctMjYwMzE5NTEtMTc2NDAwMC0xODZkMTBlN2U0Y2UzOSIsIiRpZGVudGl0eV9sb2dpbl9pZCI6IjU4NTIyNDE1MjQyNTE4NCJ9%22%2C%22history_login_id%22%3A%7B%22name%22%3A%22%24identity_login_id%22%2C%22value%22%3A%22585224152425184%22%7D%2C%22%24device_id%22%3A%22186d10e7e4b5de-0eb94671a326d7-26031951-1764000-186d10e7e4ce39%22%7D; zsxq_access_token=7C9F10E0-FC42-9DDF-C1BC-7D646E8BE4F9_0921EDF3A6D1FAA1; abtest_env=product; zsxqsessionid=f4a5fb770052e56d9f92c6df1154f6d3";
+        post.addHeader("cookie", cookie);
+        post.addHeader("Content-Type", "application/json; charset=UTF-8");
 
         String paramJson = "{\n" +
                 "  \"req_data\": {\n" +
