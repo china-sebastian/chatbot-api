@@ -5,6 +5,8 @@ import cn.bugstack.ai.api.domain.zsxq.IZsxqApi;
 import cn.bugstack.ai.api.domain.zsxq.model.aggregates.UnansweredQuestionAggregates;
 import cn.bugstack.ai.api.domain.zsxq.model.vo.Topics;
 import com.alibaba.fastjson.JSON;
+import com.unfbx.chatgpt.OpenAiClient;
+import com.unfbx.chatgpt.entity.completions.CompletionResponse;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -15,6 +17,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -34,6 +37,10 @@ public class SpringBootRunTest {
 
     @Value("${chatbot-api.cookie}")
     private String cookie;
+
+
+    @Value("${chatbot-api.openAiKey}")
+    private String openAiKey;
 
     @Resource
     private IZsxqApi zsxqApi;
@@ -60,6 +67,13 @@ public class SpringBootRunTest {
     public void test_chatGPT() throws IOException {
         String respnse = openAI.doChatGPT("帮我写一个Java冒泡排序");
         logger.info("查询结果:{}",respnse);
+    }
+
+
+
+    @Test
+    public void testApi(){
+
     }
 }
 

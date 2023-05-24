@@ -39,31 +39,33 @@ public class OpenAI implements IOpenAI {
     @Override
     public String doChatGPT(String question) throws IOException {
         CloseableHttpClient httpClient = HttpClientBuilder.create().build();
-        String chatGPTUri = "https://api.openai.com/v1/models";
+//        String chatGPTUri = "https://api.openai.com/v1/models";
+        String chatGPTUri = "https://api.openai-proxy.com/v1/chat/completions";
+
+
+        System.out.println("question:" + question);
         HttpPost httpPost = new HttpPost(chatGPTUri);
 
         httpPost.addHeader("Content-Type","application/json");
-        httpPost.addHeader("Authorization","Bearer  "+openAiKey);
-//                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
-
-
+        httpPost.addHeader("Authorization","Bearer "+openAiKey);
 
         String paramJson = "{\n" +
-                "     \"model\": \"gpt-3.5-turbo\",\n" +
-                "     \"messages\": [{\"role\": \"user\", \"content\": \""+question+"\"}],\n" +
-                "     \"temperature\": 0.7\n" +
-                "   }";
+                "    \"model\": \"gpt-3.5-turbo\",\n" +
+                "    \"messages\": [{\"role\": \"user\", \"content\": \""+question+"\"}]\n" +
+                "  }";
         StringEntity stringEntity = new StringEntity(paramJson, ContentType.create("text/json", "UTF-8"));
         httpPost.setEntity(stringEntity);
 
         CloseableHttpResponse response = httpClient.execute(httpPost);
+        System.out.println("code:" + response.getStatusLine().getStatusCode());
         if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
             String jsonStr = EntityUtils.toString(response.getEntity());
+//            System.out.println(jsonStr);
             AIAnswer aiAnswer = JSON.parseObject(jsonStr, AIAnswer.class);
             StringBuilder answers = new StringBuilder();
             List<Choices> choices = aiAnswer.getChoices();
             for (Choices choice : choices) {
-                answers.append(choice.getText());
+                answers.append(choice.getMessage().getContent());
             }
             return answers.toString();
         } else {

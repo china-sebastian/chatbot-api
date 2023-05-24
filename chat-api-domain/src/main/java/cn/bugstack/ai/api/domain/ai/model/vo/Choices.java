@@ -6,45 +6,31 @@ package cn.bugstack.ai.api.domain.ai.model.vo;
  * @Date 2023/5/23 19:21
  * github:https://github.com/china-sebastian
  */
-public class Choices {
 
-    private String text;
-
-    private int index;
-
-    private String logprobs;
+public class Choices
+{
+    private Message message;
 
     private String finish_reason;
 
-    public String getText() {
-        return text;
-    }
+    private int index;
 
-    public void setText(String text) {
-        this.text = text;
+    public void setMessage(Message message){
+        this.message = message;
     }
-
-    public int getIndex() {
-        return index;
+    public Message getMessage(){
+        return this.message;
     }
-
-    public void setIndex(int index) {
+    public void setFinish_reason(String finish_reason){
+        this.finish_reason = finish_reason;
+    }
+    public String getFinish_reason(){
+        return this.finish_reason;
+    }
+    public void setIndex(int index){
         this.index = index;
     }
-
-    public String getLogprobs() {
-        return logprobs;
-    }
-
-    public void setLogprobs(String logprobs) {
-        this.logprobs = logprobs;
-    }
-
-    public String getFinish_reason() {
-        return finish_reason;
-    }
-
-    public void setFinish_reason(String finish_reason) {
-        this.finish_reason = finish_reason;
+    public int getIndex(){
+        return this.index;
     }
 }
